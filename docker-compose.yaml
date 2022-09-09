@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+  jenkins:
+    image: jenkins/jenkins
+    ports:
+      - 8081:8081
+    volumes:
+      - ~/jenkins/jenkins_home:/var/jenkins_home
+  tomcat:
+    image: tomcat
+    ports:
+      - 8001:8081
+    volumes:
+      - ~/jenkins/jenkins_home/deploy:/usr/local/tomcat/webapps
+    depends_on:
+      - jenkins
+  # database:
+  #   image: mongo
+  #   ports:
+  #     - 27017:27017
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=user
+  #     - MONGO_INITDB_ROOT_PASSWORD=pass
